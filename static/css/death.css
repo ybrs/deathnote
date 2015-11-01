@@ -49,10 +49,10 @@ body {
   font-size: 20px;
 }
 li:hover {
-  background-color: lightgrey;
+  background-color: dimgray;
 }
 .list-group-item-text:hover {
-  color: black;
+  color: lightgrey;
 }
 .death-input {
   padding-left: 42%;

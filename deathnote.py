@@ -18,7 +18,7 @@ def new():
                 ]
     deaths = db.posts.aggregate(pipeline)
     deaths = list(deaths)
-    if not deaths:
+    if not deaths and offset:
         abort(404)
     return render_template('index.html',
                            deaths=deaths,
@@ -50,7 +50,7 @@ def index():
             post = db.posts.find({'name': name,
                                   'ip': request.remote_addr})
             post = list(post)
-            if not post and offset:
+            if not post:
                 if len(name) < 25:
                     db.posts.insert({'name': name,
                                      'ip': request.remote_addr,

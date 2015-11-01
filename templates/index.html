@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Death note? Who do you want to die?</title>
+    <title>Death note. Write a name</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -24,19 +24,31 @@
           <div class="masthead clearfix">
             <div class="inner">
               <h3 class="masthead-brand">Death Note</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="{% if kind == 'top'%} active {% endif %}"><a href="/">Top</a></li>
+                  <li class="{% if kind == 'new' %} active {% endif %}"><a href="/new/">New</a></li>
+                </ul>
+              </nav>
             </div>
           </div>
 
         <div class="list-group">
-        <input type="text" placeholder="Who shall die? "class="list-group-item death-input"/>
-
+        <input type="text" placeholder="Write a name... "class="list-group-item death-input"/>
+          <span class="death-list">
           {% for death in deaths %}
-          <li class="list-group-item">
+            <li class="list-group-item">
             <span class="badge">{{ death.count }}</span>
             <p class="list-group-item-text">{{ death._id }}</p>
           </li>
           {% endfor %}
+            <li class="load-more">
+                <a class="next" href="?offset={{ offset }}">Load more</a>
+            </li>
+          </span>
+
         </div>
+
           <div class="mastfoot">
             <div class="inner">
               <p>Open source project <a href="http://github.com/vargi/deathnote">deathnote</a>
@@ -53,6 +65,25 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.class.js"></script>
+    <script src="/static/js/hipo-infinity-scroll-min.js"></script>
     <script src="/static/js/death.js"></script>
+
+<script type="text/javascript">
+
+    new hipo.InfinityScroll({
+        "pagination_selector": ".load-more",
+        "next_link_selector": ".next",
+        "content_selector": ".death-list",
+        "max_page": 5,
+        "on_page_load": function () {
+            $("footer").css({
+                "position": "fixed",
+                "bottom": 0,
+                "width": "100%"
+            });
+        }
+    });
+</script>
   </body>
 </html>

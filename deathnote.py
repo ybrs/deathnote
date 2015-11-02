@@ -46,14 +46,15 @@ def index():
     else:
         data = request.json
         name = data.get('text')
+        ip_address = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
         if name:
             post = db.posts.find({'name': name,
-                                  'ip': request.environ['REMOTE_ADDR']})
+                                  'ip': ip_address})
             post = list(post)
             if not post:
                 if len(name) < 25:
                     db.posts.insert({'name': name,
-                                     'ip': request.environ['REMOTE_ADDR'],
+                                     'ip': ip_address,
                                      'datetime': datetime.now()})
         return render_template('index.html')
 

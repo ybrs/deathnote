@@ -38,22 +38,28 @@ body {
 .badge{
   float: left !important;
 }
+
 .list-group{
   padding-top: 20%;
 
 }
+
 .list-group-item {
   background-color: #333;
   border: #333;
   height: 60px;
   font-size: 20px;
+  cursor: pointer;
 }
+
 li:hover {
   background-color: dimgray;
 }
+
 .list-group-item-text:hover {
   color: lightgrey;
 }
+
 .death-input {
   padding-left: 42%;
 }
@@ -61,6 +67,7 @@ li:hover {
 textarea:focus, input:focus{
     outline: 0;
 }
+
 .list-group-item-text {
   border: black;
   height: 60px;

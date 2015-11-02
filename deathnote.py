@@ -48,12 +48,12 @@ def index():
         name = data.get('text')
         if name:
             post = db.posts.find({'name': name,
-                                  'ip': request.remote_addr})
+                                  'ip': request.environ['REMOTE_ADDR']})
             post = list(post)
             if not post:
                 if len(name) < 25:
                     db.posts.insert({'name': name,
-                                     'ip': request.remote_addr,
+                                     'ip': request.environ['REMOTE_ADDR'],
                                      'datetime': datetime.now()})
         return render_template('index.html')
 
